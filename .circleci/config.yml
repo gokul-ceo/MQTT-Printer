@@ -22,8 +22,8 @@ jobs:
       - run:
           name: Restart the service
           command: | 
-           sudo systemctl start PrintJob_script.service
+           sudo systemctl daemon-reload
       - run: 
           name: Check Status of the service
           command: | 
-           sudo systemctl status PrintJob_script.service
+           sudo systemctl restart PrintJob_script.service
