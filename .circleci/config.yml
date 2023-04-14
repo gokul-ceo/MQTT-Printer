@@ -10,4 +10,8 @@ jobs:
     steps:
       - run: git clone https://github.com/gokul-ceo/MQTT-Printer.git
       - run: cd MQTT-Printer
-      - run: sudo cp -r . ~/MQTT-Printer
+      - run: 
+	  name: Copy project to home
+	  command: | 
+	     mkdir -p ~/
+	     cp -r . ~/
