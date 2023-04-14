@@ -1,15 +1,18 @@
 import paho.mqtt.client as paho
 from paho import mqtt
 import json
+import os
 import ssl
 from escpos.printer import Usb
-#removed
+# removed
 VENDOR_ID = 0x0fe6
 PRODUCT_ID = 0x811e
 
 # Initialize printer variable
 global printer
 printer = None
+username = os.environ.get('MQTT_USERNAME')
+pwd = os.environ.get('MQTT_PWD')
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
@@ -50,7 +53,8 @@ def on_message(client, userdata, msg):
         printer.text("{:<20}{:<8}{:<10}\n".format("Item", "Qty", "Price"))
         printer.text("-------------------------------------------\n")
         for item in items:
-            printer.text("{:<20}{:<8}{:<10.2f}\n".format(item["name"], item["quantity"], item["price"]))
+            printer.text("{:<20}{:<8}{:<10.2f}\n".format(
+                item["name"], item["quantity"], item["price"]))
             subtotal += item["price"] * int(item["quantity"])
         printer.text("-------------------------------------------\n")
 
@@ -74,13 +78,14 @@ def on_message(client, userdata, msg):
     if printer is not None:
         printer.close()
 
+
 client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv5)
 ssl_ctx = ssl.create_default_context()
 ssl_ctx.check_hostname = False
 ssl_ctx.verify_mode = ssl.CERT_NONE
 client.tls_set_context(ssl_ctx)
 client.tls_insecure_set(True)
-client.username_pw_set(username="printagent", password="printagent")
+client.username_pw_set(username=username, password=pwd)
 client.connect("aef90c8a1e6548278f2e423f0cf14f4c.s1.eu.hivemq.cloud", 8883)
 client.on_connect = on_connect
 client.on_message = on_message
