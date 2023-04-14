@@ -13,8 +13,8 @@ jobs:
       - run: 
           name: Copy project to home
           command: | 
-           mkdir -p ~/
-           cp -r . ~/
+           sudo mkdir -p ~/
+           sudo cp -r . ~/
       - run:
           name: Stop the service
           command: | 
