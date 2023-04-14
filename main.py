@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
             printer.text("SRI SARAVANA\n")
             printer.text("NH SERVICE ROAD\n")
             printer.text("MELMARUVATHUR -603319\n")
-            printer.text("CONTACT - 99652587272\n\n")
+            printer.text("CONTACT - 9965258727\n\n")
 
             # print order number, bill number, time and date
             printer.set("left", "a", "b", 1, 1)
