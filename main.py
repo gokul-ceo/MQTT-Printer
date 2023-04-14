@@ -3,7 +3,7 @@ from paho import mqtt
 import json
 import ssl
 from escpos.printer import Usb
-
+#This line is added new
 VENDOR_ID = 0x0fe6
 PRODUCT_ID = 0x811e
 
@@ -14,7 +14,7 @@ printer = None
 
 def on_connect(client, userdata, flags, rc, properties=None):
     print("Connected with result code " + str(rc))
-    # subscribe to the topic when connected
+    # subscribe to the topic when connecte
     client.subscribe("print/orderdetails", qos=1)
 
 
