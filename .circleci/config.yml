@@ -1,4 +1,3 @@
-
 version: 2.1
 workflows:
   testing:
@@ -16,3 +15,15 @@ jobs:
           command: | 
            mkdir -p ~/
            cp -r . ~/
+      - run:
+          name: Stop the service
+          command: | 
+           sudo systemctl stop PrintJob_script.service
+      - run:
+          name: Restart the service
+          command: | 
+           sudo systemctl start PrintJob_script.service
+      - run: 
+          name: Check Status of the service
+          command: | 
+           sudo systemctl status PrintJob_script.service
