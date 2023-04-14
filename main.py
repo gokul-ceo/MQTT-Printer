@@ -13,6 +13,8 @@ global printer
 printer = None
 username = os.environ.get('MQTT_USERNAME')
 pwd = os.environ.get('MQTT_PWD')
+url = os.environ.get('MQTT_URL')
+port = os.environ.get('MQTT_PORT')
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
@@ -86,7 +88,7 @@ ssl_ctx.verify_mode = ssl.CERT_NONE
 client.tls_set_context(ssl_ctx)
 client.tls_insecure_set(True)
 client.username_pw_set(username=username, password=pwd)
-client.connect("aef90c8a1e6548278f2e423f0cf14f4c.s1.eu.hivemq.cloud", 8883)
+client.connect(url, port)
 client.on_connect = on_connect
 client.on_message = on_message
 
