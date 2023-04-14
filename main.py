@@ -88,7 +88,7 @@ ssl_ctx.verify_mode = ssl.CERT_NONE
 client.tls_set_context(ssl_ctx)
 client.tls_insecure_set(True)
 client.username_pw_set(username=username, password=pwd)
-client.connect(url, str(port))
+client.connect(url, 8883)
 client.on_connect = on_connect
 client.on_message = on_message
 
