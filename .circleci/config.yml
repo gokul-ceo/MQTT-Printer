@@ -10,20 +10,20 @@ jobs:
     steps:
       - run: git clone https://github.com/gokul-ceo/MQTT-Printer.git
       - run: cd MQTT-Printer
-      - run: 
+      - run:
           name: Copy project to home
-          command: | 
-           sudo mkdir -p ~/
-           sudo cp -r . ~/
+          command: |
+            sudo mkdir -p ~/
+            sudo cp -r . ~/
       - run:
           name: Stop the service
-          command: | 
-           sudo systemctl stop PrintJob_script.service
+          command: |
+            sudo systemctl stop PrintJob_script.service
       - run:
           name: Restart the service
-          command: | 
-           sudo systemctl daemon-reload
-      - run: 
+          command: |
+            sudo systemctl daemon-reload
+      - run:
           name: Check Status of the service
-          command: | 
-           sudo systemctl restart PrintJob_script.service
+          command: |
+            sudo systemctl restart PrintJob_script.service
