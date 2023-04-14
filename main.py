@@ -11,8 +11,8 @@ PRODUCT_ID = 0x811e
 # Initialize printer variable
 global printer
 printer = None
-username = os.environ.get('MQTT_USERNAME')
-pwd = os.environ.get('MQTT_PWD')
+username = 'printagent'
+pwd = 'printagent'
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
