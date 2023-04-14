@@ -1,3 +1,4 @@
+
 version: 2.1
 workflows:
   testing:
@@ -11,7 +12,7 @@ jobs:
       - run: git clone https://github.com/gokul-ceo/MQTT-Printer.git
       - run: cd MQTT-Printer
       - run: 
-	  name: Copy project to home
-	  command: | 
-	     mkdir -p ~/
-	     cp -r . ~/
+          name: Copy project to home
+          command: | 
+           mkdir -p ~/
+           cp -r . ~/
