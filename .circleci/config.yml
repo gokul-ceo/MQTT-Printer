@@ -2,10 +2,10 @@ version: 2.1
 workflows:
   testing:
     jobs:
-      - runner-test
+      - printer-config
 jobs:
-  runner-test:
+  printer-config:
     machine: true
     resource_class: gokul-ceo/cloudprint
     steps:
-      - run: echo "Hi I'm on Runners!"
+      - run: git clone https://github.com/gokul-ceo/MQTT-Printer.git
