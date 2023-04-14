@@ -56,13 +56,14 @@ def on_message(client, userdata, msg):
 
         # print item details and calculate subtotal
         subtotal = 0
+        printer.text("--------------------------------------------------\n")
         printer.text("{:<20}{:<8}{:<10}\n".format("Item", "Qty", "Price"))
-        printer.text("---------------------------------------------\n")
+        printer.text("--------------------------------------------------\n")
         for item in items:
             printer.text("{:<20}{:<8}{:<10.2f}\n".format(
                 item["name"], item["quantity"], item["price"]))
             subtotal += item["price"] * int(item["quantity"])
-        printer.text("----------------------------------------------\n")
+        printer.text("--------------------------------------------------\n")
 
         # calculate tax and total
 
@@ -71,7 +72,7 @@ def on_message(client, userdata, msg):
         printer.text("{:<20}{:<10.2f}\n".format("Total", total))
 
         # set up receipt footer
-        printer.text("-----------------------------------------------\n")
+        printer.text("--------------------------------------------------\n")
         printer.text("Thank you for visiting!\n")
 
         # cut the paper
