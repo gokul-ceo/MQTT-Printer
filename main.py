@@ -3,7 +3,7 @@ from paho import mqtt
 import json
 import ssl
 from escpos.printer import Usb
-#This line is added new
+#This line is removed
 VENDOR_ID = 0x0fe6
 PRODUCT_ID = 0x811e
 
