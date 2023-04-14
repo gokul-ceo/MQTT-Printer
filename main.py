@@ -84,6 +84,7 @@ def on_message(client, userdata, msg):
         if printer is not None:
             printer.close()
 
+
 client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv5)
 ssl_ctx = ssl.create_default_context()
 ssl_ctx.check_hostname = False
@@ -96,4 +97,3 @@ client.on_connect = on_connect
 client.on_message = on_message
 # continuously check for incoming messages
 client.loop_forever()
-
