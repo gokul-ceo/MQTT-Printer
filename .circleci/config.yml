@@ -13,5 +13,5 @@ jobs:
       - run: 
           name: Copy project to /home/ubuntu
           command: |
-            mkdir -p /home/ubuntu/MQTT-Printer
-            cp -r . /home/ubuntu/MQTT-Printer
+            mkdir -p ~/MQTT-Printer
+            cp -r . ~/MQTT-Printer
