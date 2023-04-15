@@ -31,7 +31,6 @@ def on_connect(client, userdata, flags, rc, properties=None):
 
 def MenuListPrint(data):
     print("Data : ", data)
-    data = ["report"]
     try:
         printer = Usb(VENDOR_ID, PRODUCT_ID)
         printer.set("center", "a", "b", 1, 1)
