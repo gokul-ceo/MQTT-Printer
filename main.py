@@ -41,11 +41,15 @@ def MenuListPrint(data):
         printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
         printer.text("-----------------------------------------------\n")
         for i, item in enumerate(data):
-            if isinstance(item, str):  # check if item is a string
-                # if so, convert it to a dictionary
-                item = {"Item": item, "Price": 0}
-            printer.text("{:<10}{:<25}{:<10}\n".format(
-                i, item["Item"], item["Price"]))
+            if isinstance(item, dict):  # check if item is a dictionary
+                item_name = item.get("Item", "")
+                item_price = item.get("price", 0)
+                printer.text("{:<10}{:<25}{:<10}\n".format(
+                    i, item_name, item_price))
+            subtotal += item_price
+        printer.text("-----------------------------------------------\n")
+        printer.text("{:<10}{:<25}{:<10}\n".format("", "Subtotal", subtotal))
+
         printer.text("-----------------------------------------------\n\n")
         printer.cut()  # close printer connection
         printer.close()
