@@ -63,7 +63,7 @@ def ReportType(data):
         printer.text("{:<20}{:<8}{:<10}{:<10}\n".format(
             "Item", "Qty", "Price", "Total"))
         printer.text("-----------------------------------------------\n")
-        for item in data:
+        for item in enumerate(data):
             printer.text("{:<20}{:<8}{:<10.2f}{:<10.2f}\n".format(
                 item["_id"], item["totalQuantity"], item["totalPrice"] / item["totalQuantity"], item["totalPrice"]))
             subtotal += item["totalPrice"]
