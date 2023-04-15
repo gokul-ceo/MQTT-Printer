@@ -30,6 +30,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
 
 
 def MenuListPrint(data):
+    print("Data : ", data)
     try:
         printer = Usb(VENDOR_ID, PRODUCT_ID)
         printer.set("center", "a", "b", 1, 1)
@@ -41,7 +42,7 @@ def MenuListPrint(data):
         printer.text("-----------------------------------------------\n")
         for i, item in enumerate(data, 0):
             printer.text("{:<10}{:<25}{:<10}\n".format(
-                i, item["Item"], item["Price"]))
+                str(i), item["Item"], item["Price"]))
         printer.text("-----------------------------------------------\n\n")
         printer.cut()  # close printer connection
         printer.close()
