@@ -65,7 +65,7 @@ def on_message(client, userdata, msg):
                 "Item", "Qty", "Price", "Total"))
             printer.text("-----------------------------------------------\n")
             for item in items:
-                printer.text("{:<20}{:<8}{:<10.2f}\n".format(
+                printer.text("{:<20}{:<8}{:<10.2f}{:<10.2f}\n".format(
                     item["name"], item["quantity"], item["price"], item["price"]*int(item["quantity"])))
                 subtotal += item["price"] * int(item["quantity"])
             printer.text("-----------------------------------------------\n")
