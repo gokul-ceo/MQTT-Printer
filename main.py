@@ -11,6 +11,7 @@ PRODUCT_ID = 0x811e
 # Initialize printer variable
 global printer
 printer = Usb(VENDOR_ID, PRODUCT_ID)
+
 username = os.environ.get('MQTT_USERNAME')
 pwd = os.environ.get('MQTT_PWD')
 url = os.environ.get('MQTT_URL')
@@ -78,6 +79,8 @@ def ReportType(data):
 
 
 def on_message(client, userdata, msg):
+    print("on_message is invoked")
+    print("Message is arrived from topic: ", msg.topic)
     if msg.topic == "printer/status":
         print("Status send")
     elif msg.topic == "printer/report":
@@ -85,6 +88,7 @@ def on_message(client, userdata, msg):
     elif msg.topic == "printer/printmenulist":
         MenuListPrint(json.loads(msg.payload.decode("utf-8")))
     else:
+        print("Print/orderdetails is printing....")
         try:
             # decode the incoming message
             data = json.loads(msg.payload.decode("utf-8"))
@@ -158,4 +162,5 @@ client.connect('313c77e2537a4793a096fa2c89b5737a.s1.eu.hivemq.cloud', 8883)
 client.on_connect = on_connect
 client.on_message = on_message
 # continuously check for incoming messages
+print('End is reached..')
 client.loop_forever()
