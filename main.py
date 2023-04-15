@@ -38,7 +38,7 @@ def MenuListPrint(data):
         # printer.text("-----------------------------------------------\n")
         printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
         printer.text("-----------------------------------------------\n")
-        for i, item in enumerate(data):
+        for i, item in enumerate(data, 0):
             printer.text("{:<10}{:<25}{:<10}\n".format(
                 i, item["Item"], item["Price"]))
         printer.text("-----------------------------------------------\n\n")
