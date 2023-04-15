@@ -1,3 +1,4 @@
+import traceback
 import paho.mqtt.client as paho
 from paho import mqtt
 import json
@@ -46,7 +47,8 @@ def MenuListPrint(data):
         printer.close()
 
     except Exception as e:
-        print(f"Failed to print receipt: {e}")
+        print("Failed to print receipt. Full traceback message below:")
+        traceback.print_exc()
         if printer is not None:
             printer.close()
 
