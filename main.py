@@ -42,6 +42,9 @@ def MenuListPrint(data):
         printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
         printer.text("-----------------------------------------------\n")
         for i, item in enumerate(data):
+            if isinstance(item, str):  # check if item is a string
+                # if so, convert it to a dictionary
+                item = {"Item": item, "Price": 0}
             printer.text("{:<10}{:<25}{:<10}\n".format(
                 i, item["Item"], item["Price"]))
         printer.text("-----------------------------------------------\n\n")
