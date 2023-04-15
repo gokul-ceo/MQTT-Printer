@@ -22,6 +22,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
     # subscribe to the topic when connecte
     client.subscribe("print/orderdetails", qos=1)
     client.subscribe("print/testing", qos=1)
+    client.subscribe("printer/report", qos=1)
     client.publish("printer/status", 'Printer Ready!')
 
 
