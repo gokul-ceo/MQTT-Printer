@@ -23,7 +23,33 @@ def on_connect(client, userdata, flags, rc, properties=None):
     client.subscribe("print/orderdetails", qos=1)
     client.subscribe("print/testing", qos=1)
     client.subscribe("printer/report", qos=1)
+    client.subscribe("printer/printmenulist", qos=1)
     client.publish("printer/status", 'Printer Ready!')
+
+
+def MenuListPrint(data):
+    try:
+        printer = Usb(VENDOR_ID, PRODUCT_ID)
+        printer.set("center", "a", "b", 1, 1)
+        printer.text("SRI SARAVANA\n\n")
+        printer.text("MENU LIST\n\n")
+        data = ["menu"]
+        subtotal = 0
+        # printer.text("-----------------------------------------------\n")
+        printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
+        printer.text("-----------------------------------------------\n")
+        for i, item in data:
+            printer.text("{:<10}{:<25}{:<10}\n".format(
+                i, item["Item"], item["Price"]))
+        printer.text("-----------------------------------------------\n\n")
+        printer.cut()  # close printer connection
+        printer.close()
+
+    except Exception as e:
+
+        print(f"Failed to print receipt: {e}")
+        if printer is not None:
+            printer.close()
 
 
 def ReportType(data):
@@ -56,6 +82,8 @@ def on_message(client, userdata, msg):
         print("Status send")
     elif msg.topic == "printer/report":
         ReportType(json.loads(msg.payload.decode("utf-8")))
+    elif msg.topic == "printer/printmenulist":
+        MenuListPrint(json.loads(msg.payload.decode("utf-8")))
     else:
         try:
             # decode the incoming message
