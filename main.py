@@ -34,12 +34,11 @@ def MenuListPrint(data):
         printer.set("center", "a", "b", 1, 1)
         printer.text("SRI SARAVANA\n\n")
         printer.text("MENU LIST\n\n")
-        data = ["menu"]
         subtotal = 0
         # printer.text("-----------------------------------------------\n")
         printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
         printer.text("-----------------------------------------------\n")
-        for i, item in data:
+        for i, item in enumerate(data):
             printer.text("{:<10}{:<25}{:<10}\n".format(
                 i, item["Item"], item["Price"]))
         printer.text("-----------------------------------------------\n\n")
@@ -47,7 +46,6 @@ def MenuListPrint(data):
         printer.close()
 
     except Exception as e:
-
         print(f"Failed to print receipt: {e}")
         if printer is not None:
             printer.close()
