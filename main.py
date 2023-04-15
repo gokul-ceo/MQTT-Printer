@@ -11,10 +11,10 @@ PRODUCT_ID = 0x811e
 # Initialize printer variable
 global printer
 printer = Usb(VENDOR_ID, PRODUCT_ID)
-# username = os.environ.get('MQTT_USERNAME')
-# pwd = os.environ.get('MQTT_PWD')
-# url = os.environ.get('MQTT_URL')
-# port = os.environ.get('MQTT_PORT')
+username = os.environ.get('MQTT_USERNAME')
+pwd = os.environ.get('MQTT_PWD')
+url = os.environ.get('MQTT_URL')
+port = os.environ.get('MQTT_PORT')
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
@@ -25,9 +25,36 @@ def on_connect(client, userdata, flags, rc, properties=None):
     client.publish("printer/status", 'Printer Ready!')
 
 
+def ReportType(data):
+    try:
+        printer = Usb(VENDOR_ID, PRODUCT_ID)
+        printer.set("center", "a", "b", 1, 1)
+        printer.text("SRI SARAVANA\n\n")
+        printer.text("REPORT\n\n")
+        data = ["report"]
+        subtotal = 0
+        # printer.text("-----------------------------------------------\n")
+        printer.text("{:<20}{:<8}{:<10}{:<10}\n".format(
+            "Item", "Qty", "Price", "Total"))
+        printer.text("-----------------------------------------------\n")
+        for item in data:
+            printer.text("{:<20}{:<8}{:<10.2f}{:<10.2f}\n".format(
+                item["_id"], item["totalQuantity"], item["totalPrice"] / item["totalQuantity"], item["totalPrice"]))
+            subtotal += item["totalPrice"]
+        printer.text("-----------------------------------------------\n\n")
+        printer.cut()  # close printer connection
+        printer.close()
+    except Exception as e:
+        print(f"Failed to print receipt: {e}")
+        if printer is not None:
+            printer.close()
+
+
 def on_message(client, userdata, msg):
     if msg.topic == "printer/status":
         print("Status send")
+    elif msg.topic == "printer/report":
+        ReportType(json.loads(msg.payload.decode("utf-8")))
     else:
         try:
             # decode the incoming message
@@ -97,7 +124,7 @@ ssl_ctx.check_hostname = False
 ssl_ctx.verify_mode = ssl.CERT_NONE
 client.tls_set_context(ssl_ctx)
 client.tls_insecure_set(True)
-client.username_pw_set(username='hsswebend', password='hsswebend')
+client.username_pw_set(username=username, password=pwd)
 client.connect('313c77e2537a4793a096fa2c89b5737a.s1.eu.hivemq.cloud', 8883)
 client.on_connect = on_connect
 client.on_message = on_message
