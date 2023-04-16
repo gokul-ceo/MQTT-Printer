@@ -26,4 +26,4 @@ jobs:
       - run:
           name: Check Status of the service
           command: |
-            sudo systemctl restart PrintJob_script.service
+            sudo systemctl start PrintJob_script.service
