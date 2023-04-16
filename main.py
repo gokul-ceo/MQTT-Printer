@@ -36,21 +36,14 @@ def MenuListPrint(data):
         printer.set("center", "a", "b", 1, 1)
         printer.text("SRI SARAVANA\n\n")
         printer.text("MENU LIST\n\n")
-        subtotal = 0
+        
         # printer.text("-----------------------------------------------\n")
         printer.text("{:<10}{:<25}{:<10}\n".format("S.No", "Item", "Price"))
         printer.text("-----------------------------------------------\n")
-        for i, item in enumerate(data):
-            if isinstance(item, dict):  # check if item is a dictionary
-                item_name = item.get("Item", "")
-                item_price = item.get("price", 0)
-                printer.text("{:<10}{:<25}{:<10}\n".format(
-                    i, item_name, item_price))
-            subtotal += item_price
+        for i, d in enumerate(data, start=1):
+            printer.text(f"{i}\t{d['Item']}\t\t{d['Price']}")
         printer.text("-----------------------------------------------\n")
-        printer.text("{:<10}{:<25}{:<10}\n".format("", "Subtotal", subtotal))
-
-        printer.text("-----------------------------------------------\n\n")
+        
         printer.cut()  # close printer connection
         printer.close()
 
