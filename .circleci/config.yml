@@ -24,6 +24,10 @@ jobs:
           command: |
             sudo systemctl daemon-reload
       - run:
-          name: Check Status of the service
+          name: Start the service
           command: |
             sudo systemctl start PrintJob_script.service
+      - run:
+          name: Check Status of the service
+          command: |
+            sudo journalctl -u PrintJob_script.service -f
