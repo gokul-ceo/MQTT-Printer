@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Stop the service
           command: |
-            sudo systemctl stop PrintJob_script.service
+            sudo systemctl stop RestyPrinter.service
       - run:
           name: Restart the service
           command: |
@@ -26,8 +26,8 @@ jobs:
       - run:
           name: Start the service
           command: |
-            sudo systemctl start PrintJob_script.service
+            sudo systemctl start RestyPrinter.service
       - run:
           name: Check Status of the service
           command: |
-            sudo journalctl -u PrintJob_script.service -f
+            sudo systemctl status RestyPrinter.service 
