@@ -60,7 +60,6 @@ def ReportType(data):
         printer.set("center", "a", "b", 1, 1)
         printer.text("SRI SARAVANA\n\n")
         printer.text("REPORT\n\n")
-        data = ["report"]
         subtotal = 0
         # printer.text("-----------------------------------------------\n")
         printer.text("{:<20}{:<8}{:<10}{:<10}\n".format(
