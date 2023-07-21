@@ -13,12 +13,12 @@ jobs:
       - run:
           name: Copy project to home
           command: |
-            sudo mkdir -p ~/
-            sudo cp -r . ~/
+            sudo mkdir -p ~/restyagent
+            sudo cp -r . ~/restyagent/
       - run:
           name: Stop the service
           command: |
-            sudo systemctl stop restyprinter.service
+            sudo systemctl stop restyprint.service
       - run:
           name: Restart the service
           command: |
@@ -26,4 +26,4 @@ jobs:
       - run:
           name: Start the service
           command: |
-            sudo systemctl start restyprinter.service
+            sudo systemctl start restyprint.service
