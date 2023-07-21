@@ -13,8 +13,7 @@ jobs:
       - run:
           name: Copy project to home
           command: |
-            sudo mkdir -p ~/restyagent
-            sudo cp -r . ~/restyagent/
+            sudo cp -r . /home/restyagent/
       - run:
           name: Stop the service
           command: |
