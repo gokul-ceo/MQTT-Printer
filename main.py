@@ -1,4 +1,5 @@
 # testing the ci/cd
+# copied from source
 import traceback
 import paho.mqtt.client as paho
 from paho import mqtt
@@ -11,7 +12,7 @@ VENDOR_ID = 0x0fe6
 PRODUCT_ID = 0x811e
 
 # Initialize printer variable
-global printer
+global printer  
 printer = Usb(VENDOR_ID, PRODUCT_ID)
 
 username = os.environ.get('MQTT_USERNAME')
@@ -110,14 +111,14 @@ def on_message(client, userdata, msg):
             printer.set("left", "a", "b", 1, 1)
             # printer.text("Order No: "+ data["orderno"] +"\n")
             printer.set("right", "a", "b", 1, 1)
-            printer.text("Time: " + data["timestamp"] + "\n")
+            printer.text("Time: " + data["times"] + "\n")
             printer.text("Date: " + data["date"] + "\n")
             printer.set("left", "a", "b", 1, 1)
             printer.text("Bill No: " + str(data["bill_number"]) + "\n\n")
             printer.set('center', 'a', 'b', 1, 1)
 
             # set up receipt items
-            items = data["items"]
+            items = data["orderdetails"]
 
             # print item details and calculate subtotal
             subtotal = 0
@@ -159,7 +160,7 @@ ssl_ctx.verify_mode = ssl.CERT_NONE
 client.tls_set_context(ssl_ctx)
 client.tls_insecure_set(True)
 client.username_pw_set(username=username, password=pwd)
-client.connect('313c77e2537a4793a096fa2c89b5737a.s1.eu.hivemq.cloud', 8883)
+client.connect('6fcf49037ef74eafbc9efc59f8b0c06d.s1.eu.hivemq.cloud', 8883)
 client.on_connect = on_connect
 client.on_message = on_message
 # continuously check for incoming messages
