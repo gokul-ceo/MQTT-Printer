@@ -6,7 +6,7 @@ workflows:
 jobs:
   printer-config:
     machine: true
-    resource_class: gokul-ceo/restyprinter
+    resource_class: gokul-ceo/restyprintserver-rpi-v0
     steps:
       - run: git clone https://github.com/gokul-ceo/MQTT-Printer.git
       - run: cd MQTT-Printer
